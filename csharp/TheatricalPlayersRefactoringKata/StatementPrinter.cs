@@ -19,6 +19,11 @@ namespace TheatricalPlayersRefactoringKata
                 var thisAmount = play.GetPlayAmount(perf.Audience);
                 // print line for this order
                 result += String.Format(cultureInfo, "  {0}: {1:C} ({2} seats)\n", play.Name, Convert.ToDecimal(thisAmount / 100), perf.Audience);
+            }
+            foreach(var perf in invoice.Performances) 
+            {
+                var play = plays[perf.PlayID];
+                var thisAmount = play.GetPlayAmount(perf.Audience);
                 totalAmount += thisAmount;
             }
             foreach(var perf in invoice.Performances) 
