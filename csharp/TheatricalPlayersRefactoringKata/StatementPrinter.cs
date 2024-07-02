@@ -24,15 +24,21 @@ namespace TheatricalPlayersRefactoringKata
             foreach(var perf in invoice.Performances) 
             {
                 var play = plays[perf.PlayID]; 
-                // add volume credits
-                var volumeCreditPlay = Math.Max(perf.Audience - 30, 0);
-                // add extra credit for every ten comedy attendees
-                if ("comedy" == play.Type) volumeCreditPlay += (int)Math.Floor((decimal)perf.Audience / 5);
+                var volumeCreditPlay = VolumeCreditPlay(perf, play);
                 volumeCredits += volumeCreditPlay;
             }
             result += String.Format(cultureInfo, "Amount owed is {0:C}\n", Convert.ToDecimal(totalAmount / 100));
             result += String.Format("You earned {0} credits\n", volumeCredits);
             return result;
+        }
+
+        private static int VolumeCreditPlay(Performance perf, Play play)
+        {
+            // add volume credits
+            var volumeCreditPlay = Math.Max(perf.Audience - 30, 0);
+            // add extra credit for every ten comedy attendees
+            if ("comedy" == play.Type) volumeCreditPlay += (int)Math.Floor((decimal)perf.Audience / 5);
+            return volumeCreditPlay;
         }
     }
 }
