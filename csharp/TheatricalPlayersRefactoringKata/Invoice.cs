@@ -16,5 +16,17 @@ namespace TheatricalPlayersRefactoringKata
             this._performances = performance;
         }
 
+        public int TotalAmount(Dictionary<string, Play> plays)
+        {
+            var totalAmount = 0;
+            foreach(var perf in Performances) 
+            {
+                var play = plays[perf.PlayID];
+                var thisAmount = play.GetPlayAmount(perf.Audience);
+                totalAmount += thisAmount;
+            }
+
+            return totalAmount;
+        }
     }
 }
