@@ -28,5 +28,19 @@ namespace TheatricalPlayersRefactoringKata
 
             return totalAmount;
         }
+
+        public int VolumeCredits(Dictionary<string, Play> plays)
+        {
+            var volumeCredits = 0;
+
+            foreach(var perf in Performances) 
+            {
+                var play = plays[perf.PlayID]; 
+                var volumeCreditPlay = play.VolumeCreditPlay(perf);
+                volumeCredits += volumeCreditPlay;
+            }
+
+            return volumeCredits;
+        }
     }
 }
